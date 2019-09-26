@@ -1,33 +1,13 @@
 # Prototype
-
+# Date formats accepted:
 # rfc2822: Mon, 3 Jul 2006 17:18:43 +0200
 # iso8601: 2006-07-03 17:18:43 +0200
 
-from subprocess import run, PIPE
+# os.system() runs the specified command. subprocess module is not required since we aren't capturing any output
 from os import system
 
+# the following dates are manually entered as of now (refer issue #1) to form the letters: GK
 dates = [
-    #     'aug 25',
-    #     '19',
-    #     '7',
-    #     '15',
-    #     '13',
-    #     '23',
-    #     '31',
-    #     'jul 28',
-    #     '29',
-    #     '30',
-    #     '31',
-    #     'aug 1',
-    #     '2',
-    #     '3',
-    #     'jul 14',
-    #     '7',
-    #     'jun 30',
-    #     '23',
-    #     '16 17 18 19 20 21 22 29'
-    #     'jul 20 13 6 19 18 17 10 3'
-
     '2019-08-25 18:00:00 +0530',
     '2019-08-19 18:00:00 +0530',
     '2019-08-07 18:00:00 +0530',
@@ -64,27 +44,18 @@ dates = [
     '2019-07-03 18:00:00 +0530',
 ]
 
-
-def get_commit_hash(op1):
-    return op1.split(' ')[1]
-
-
 for date in dates:
     print(date)
 
-    command = 'echo "commit" >> test.txt'
+    command = 'echo "commit" >> test.txt'  # to the end of file
     system(command)  # number of times
 
-    command = 'git add -A'
+    command = 'git add -A'  # git staging
     system(command)
 
-    command = 'git commit -m "commit"'
+    command = 'git commit -m "commit"'  # git committing
     system(command)
-
-    #     command = r'git log -1'
-    #     op = check_output(command)
-    #     commit_hash = get_commit_hash(op)
 
     command = 'git commit --amend --no-edit --date ' + '\"' + date + '\"'
-    # format: "Mon 10 Jan 2019 20:19:19 IST"
+    # amends current commit (HEAD) to change the commit date from date of execution to "date" in the loop
     system(command)
