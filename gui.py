@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QApplication, QPushButton, QVBoxLayout, QWidget, QMa
 import datetime
 
 import button_stylesheets
-from .app import draw
+from app import draw
 
 
 class GUI(QMainWindow):
