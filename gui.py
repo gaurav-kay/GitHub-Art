@@ -70,4 +70,5 @@ class GUI(QMainWindow):
 if __name__ == '__main__':
     app = QApplication([])
     gui = GUI()
+    gui.setFixedSize(gui.size())
     app.exec_()
