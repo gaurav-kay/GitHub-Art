@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QApplication, QPushButton, QVBoxLayout, QWidget, QMa
 import datetime
 
 import button_stylesheets
+from .app import draw
 
 
 class GUI(QMainWindow):
@@ -63,7 +64,7 @@ class GUI(QMainWindow):
         print(self.sender().text())
 
     def get_list_dates(self):
-        print(self.dates_list)
+        draw(self.dates_list)
 
 
 if __name__ == '__main__':
