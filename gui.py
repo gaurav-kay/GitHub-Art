@@ -27,10 +27,6 @@ class GUI(QMainWindow):
         submit_button.clicked.connect(self.get_list_dates)
         self.main_layout.addWidget(submit_button)
 
-        reset_button = QPushButton('Reset')
-        reset_button.clicked.connect(self.reset_board)
-        self.main_layout.addWidget(reset_button)
-
         self.show()
 
     def create_grid_layout(self):
@@ -42,7 +38,7 @@ class GUI(QMainWindow):
         for column in range(52):
             for row in range(7):
                 date_button = QPushButton(
-                    (self.start_day + datetime.timedelta(days=day_count)).strftime('%Y-%m-%d %H:%M:%S')
+                    f"{(self.start_day + datetime.timedelta(days=day_count)).strftime('%Y-%m-%d %H:%M:%S')} +0530"
                 )
 
                 date_button.setMinimumSize(15, 15)
@@ -58,33 +54,35 @@ class GUI(QMainWindow):
         return group_box
 
     def add_to_list(self):
-        if self.sender().isChecked():
-            print(self.sender().styleSheet())
-            print(type(self.sender().styleSheet()))
-            print(self.sender().palette().button().color().name())  # holy fuck https://stackoverflow.com/a/43779167/9664283
-            pass
-            # check diff levels
-        else:
+        self.dates_list.append(self.sender().text())
+
+        # print(self.sender().palette().button().color().name())  # holy fuck https://stackoverflow.com/a/43779167/9664283
+        if self.sender().palette().button().color().name().lower() == button_stylesheets.UNCHECKED_BUTTON_COLOR.lower():
+            self.sender().setStyleSheet(button_stylesheets.CHECKED_LEVEL_1_BUTTON_STYLESHEET)
+        elif self.sender().palette().button().color().name().lower() == button_stylesheets.CHECKED_LEVEL_1_BUTTON_COLOR.lower():
+            self.sender().setStyleSheet(button_stylesheets.CHECKED_LEVEL_2_BUTTON_STYLESHEET)
+        elif self.sender().palette().button().color().name().lower() == button_stylesheets.CHECKED_LEVEL_2_BUTTON_COLOR.lower():
+            self.sender().setStyleSheet(button_stylesheets.CHECKED_LEVEL_3_BUTTON_STYLESHEET)
+        elif self.sender().palette().button().color().name().lower() == button_stylesheets.CHECKED_LEVEL_3_BUTTON_COLOR.lower():
+            self.sender().setStyleSheet(button_stylesheets.CHECKED_LEVEL_4_BUTTON_STYLESHEET)
+        elif self.sender().palette().button().color().name().lower() == button_stylesheets.CHECKED_LEVEL_4_BUTTON_COLOR.lower():
             self.sender().setStyleSheet(button_stylesheets.UNCHECKED_BUTTON_STYLESHEET)
+
             while self.sender().text() in self.dates_list:
                 self.dates_list.remove(self.sender().text())
 
-    def get_button_text(self):
-        if self.sender().isChecked():
-            self.sender().setStyleSheet(button_stylesheets.CHECKED_BUTTON_STYLESHEET)
-            self.dates_list.append(self.sender().text())
-        else:
-            self.sender().setStyleSheet(button_stylesheets.UNCHECKED_BUTTON_STYLESHEET)
-            self.dates_list.remove(self.sender().text())
-
-        print(self.sender().text())
+    # def get_button_text(self):
+    #     if self.sender().isChecked():
+    #         self.sender().setStyleSheet(button_stylesheets.CHECKED_BUTTON_STYLESHEET)
+    #         self.dates_list.append(self.sender().text())
+    #     else:
+    #         self.sender().setStyleSheet(button_stylesheets.UNCHECKED_BUTTON_STYLESHEET)
+    #         self.dates_list.remove(self.sender().text())
+    #
+    #     print(self.sender().text())
 
     def get_list_dates(self):
         draw(self.dates_list)
-
-    def reset_board(self):
-        print("clicked")
-        self.create_grid_layout()
 
 
 if __name__ == '__main__':

@@ -45,6 +45,7 @@ def get_commit_hash(op1):
 
 
 def draw(dates):
+    print("donee")
     for date in dates:
         print(date)
 
