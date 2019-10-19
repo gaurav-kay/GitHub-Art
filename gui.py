@@ -27,6 +27,10 @@ class GUI(QMainWindow):
         submit_button.clicked.connect(self.get_list_dates)
         self.main_layout.addWidget(submit_button)
 
+        reset_button = QPushButton('Reset')
+        reset_button.clicked.connect(self.reset_board)
+        self.main_layout.addWidget(reset_button)
+
         self.show()
 
     def create_grid_layout(self):
@@ -45,13 +49,25 @@ class GUI(QMainWindow):
                 date_button.setMaximumSize(15, 15)
                 date_button.setCheckable(True)
                 date_button.setStyleSheet(button_stylesheets.UNCHECKED_BUTTON_STYLESHEET)
-                date_button.clicked.connect(self.get_button_text)
+                date_button.clicked.connect(self.add_to_list)
                 layout.addWidget(date_button, row, column)
                 day_count += 1
 
         layout.setSpacing(3)
         group_box.setLayout(layout)
         return group_box
+
+    def add_to_list(self):
+        if self.sender().isChecked():
+            print(self.sender().styleSheet())
+            print(type(self.sender().styleSheet()))
+            print(self.sender().palette().button().color().name())  # holy fuck https://stackoverflow.com/a/43779167/9664283
+            pass
+            # check diff levels
+        else:
+            self.sender().setStyleSheet(button_stylesheets.UNCHECKED_BUTTON_STYLESHEET)
+            while self.sender().text() in self.dates_list:
+                self.dates_list.remove(self.sender().text())
 
     def get_button_text(self):
         if self.sender().isChecked():
@@ -65,6 +81,10 @@ class GUI(QMainWindow):
 
     def get_list_dates(self):
         draw(self.dates_list)
+
+    def reset_board(self):
+        print("clicked")
+        self.create_grid_layout()
 
 
 if __name__ == '__main__':
