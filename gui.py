@@ -27,7 +27,16 @@ class GUI(QMainWindow):
         submit_button.clicked.connect(self.get_list_dates)
         self.main_layout.addWidget(submit_button)
 
+        save_button = QPushButton('Save Art')
+        save_button.clicked.connect(self.save_art)
+        self.main_layout.addWidget(save_button)
+
         self.show()
+
+    def save_art(self):
+        with open(f'./saved_art/{str(datetime.datetime.now()).split(".")[0]}.txt', 'w', encoding='utf-8') as f:
+            for date in self.dates_list:
+                f.write(date)
 
     def create_grid_layout(self):
         group_box = QGroupBox("Draw desired graphics here")
