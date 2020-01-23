@@ -5,7 +5,10 @@ GitHub-Art
 
 #### An Example Result:
 
-![The End Result!](sample_result.jpg)
+![The End Result!](sample_result_1.jpg)
+![The End Result!](sample_result_2.jpg)
+
+[Link](https://github.com/test302?tab=overview&from=2018-12-01&to=2018-12-31)
 
 # Usage
 
