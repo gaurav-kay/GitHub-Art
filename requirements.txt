@@ -1,5 +1,5 @@
 docutils==0.15.2
-Pygments==2.4.2
+Pygments==2.7.4
 pypiwin32==223
 PyQt5==5.13.1
 PyQt5-sip==4.19.19
