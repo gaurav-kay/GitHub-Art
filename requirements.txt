@@ -3,4 +3,4 @@ Pygments==2.4.2
 pypiwin32==223
 PyQt5==5.13.1
 PyQt5-sip==4.19.19
-pywin32==225
+pywin32==301
